@@ -14,14 +14,21 @@
 
     const addToCart = (productInfo) => {
       setCart((prevCart) => {
-        const updatedCart = [...prevCart, {...productInfo, quantity:1}]
-        return updatedCart
+        const existingItem = prevCart.find(item => item.id === productInfo.id);
+    
+        if (existingItem) {
+          return prevCart.map(item =>
+            item.id === productInfo.id ? { ...item, quantity: item.quantity + 1 } : item
+          );
+        } else {
+          return [...prevCart, { ...productInfo, quantity: 1 }];
+        }
       });
-    }
+    };
 
     return (
       <>
-      <Cart cartItems={cart}></Cart>
+      <Cart cartItems={cart} setCart={setCart} />
       <ProductList addToCart={addToCart}></ProductList>
       </>
     )
