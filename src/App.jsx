@@ -8,13 +8,13 @@
     const [cart, setCart] = useState([]);
     
     useEffect(() => {
-      console.log(cart)
+      console.log("cartsityo" + JSON.stringify(cart))
     }, [cart]
     )
 
     const addToCart = (productInfo) => {
       setCart((prevCart) => {
-        const updatedCart = [...prevCart, productInfo]
+        const updatedCart = [...prevCart, {...productInfo, quantity:1}]
         return updatedCart
       });
     }
